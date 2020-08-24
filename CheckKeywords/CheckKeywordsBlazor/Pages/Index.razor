@@ -1,0 +1,81 @@
+﻿@page "/"
+
+<h3>Check Keywords</h3>
+<p>
+    <label>
+        need check json:
+        <textarea cols="60" rows="10" class="form-control" id="Param" @bind="@param"></textarea>
+    </label>
+</p>
+<p>
+    <button class="btn-success" @onclick="Check">Check</button>
+</p>
+
+@if (Result != null)
+{
+    <p>
+Result:
+    @if (Result.Result == 1)
+    {
+            <span style="color:green">Perfect √</span>
+    }
+    else if (Result.Result == 2)
+    {
+            <span style="color:blue">Usable </span>
+            <br />
+            <b>Savewords</b>
+
+        foreach (var item in Result.Items)
+        {
+            <p>
+                <span>Language: @item.Language</span>
+                <br />
+                <span>Save words : @string.Join(',', item.Words)</span>
+                <br />
+                <a href="@item.Ref">REF: @item.Ref</a>
+            </p>
+        }
+    }
+    else if (Result.Result == 3)
+    {
+        <span style="color:red">Disable × </span>
+
+        var keywrods = Result.Items.Where(t => t.Type == 1).ToList();
+        var savewords = Result.Items.Where(t => t.Type == 2).ToList();
+        <br />
+        <b>Keywords</b>
+        <br />
+        foreach (var item in keywrods)
+        {
+            <p>
+                <span>Language: @item.Language</span>
+                <br />
+                <span>Keywords : @string.Join(',', item.Words)</span>
+                <br />
+                <a href="@item.Ref">REF: @item.Ref</a>
+            </p>
+        }
+
+        if (savewords.Any())
+        {
+            <b>Savewords</b>
+            <br />
+
+            foreach (var item in savewords)
+            {
+                <p>
+                    <span>Language: @item.Language</span>
+                    <br />
+                    <span>Save words : @string.Join(',', item.Words)</span>
+                    <br />
+                    <a href="@item.Ref">REF: @item.Ref</a>
+                </p>
+            }
+        }
+    }
+    else
+    {
+        <span style="color:red">must be a Json</span>
+    }
+</p>
+}

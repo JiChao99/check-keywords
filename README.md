@@ -1,11 +1,12 @@
 # check-all-program-language-keywords
+
 check all program language keywords, savewords
 
 ## Use
 
 ### Powershell
 
-```ps
+```powershell
  Invoke-RestMethod api.jichao.top/check/{word}
 ```
 
@@ -17,6 +18,6 @@ OR
 
 ### Bash
 
-```
+```batch
 curl api.jichao.top/check/{word}
 ```
