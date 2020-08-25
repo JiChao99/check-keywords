@@ -21,3 +21,10 @@ OR
 ```batch
 curl api.jichao.top/check/{word}
 ```
+
+## TODO
+
+- [ ] support swagger
+- [ ] use System.Text.Json not Newtonsoft.Json
+- [ ] react
+- [ ] **classlibray use json file**
