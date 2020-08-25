@@ -28,3 +28,5 @@ curl api.jichao.top/check/{word}
 - [ ] use System.Text.Json not Newtonsoft.Json
 - [ ] react
 - [ ] **classlibray use json file**
+
+![img](checkKeywords.png)
