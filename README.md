@@ -28,5 +28,11 @@ curl api.jichao.top/check/{word}
 - [ ] use System.Text.Json not Newtonsoft.Json
 - [ ] react
 - [ ] **classlibray use json file**
+- [ ] add program language keywords/saveWords
+
+## Program Language
+
+- C#
+- javaScript
 
 ![img](checkKeywords.png)
