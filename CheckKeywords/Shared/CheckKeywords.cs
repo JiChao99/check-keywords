@@ -37,7 +37,7 @@ namespace Shared
             try
             {
 
-                JToken.Parse(str);
+                JObject.Parse(str);
                 return true;
             }
             catch

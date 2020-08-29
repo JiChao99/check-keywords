@@ -9,9 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="keywords.json">
+    <EmbeddedResource Include="keywords.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
