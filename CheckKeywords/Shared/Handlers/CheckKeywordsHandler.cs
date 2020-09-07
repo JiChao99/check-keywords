@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 
 namespace Shared.Handlers
@@ -72,7 +73,11 @@ namespace Shared.Handlers
         {
             try
             {
-                var str = "[{\"language\":\"C#\",\"ref\":\"https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/\",\"keywords\":[\"abstract\",\"as\",\"base\",\"bool\",\"break\",\"byte\",\"case\",\"catch\",\"char\",\"checked\",\"class\",\"const\",\"continue\",\"decimal\",\"default\",\"delegate\",\"do\",\"double\",\"else\",\"enum\",\"event\",\"explicit\",\"extern\",\"false\",\"finally\",\"fixed\",\"float\",\"for\",\"foreach\",\"goto\",\"if\",\"implicit\",\"in\",\"int\",\"interface\",\"internal\",\"is\",\"lock\",\"long\",\"namespace\",\"new\",\"null\",\"object\",\"operator\",\"out\",\"override\",\"params\",\"private\",\"protected\",\"public\",\"readonly\",\"ref\",\"return\",\"sbyte\",\"sealed\",\"short\",\"sizeof\",\"stackalloc\",\"static\",\"string\",\"struct\",\"switch\",\"this\",\"throw\",\"true\",\"try\",\"typeof\",\"uint\",\"ulong\",\"unchecked\",\"unsafe\",\"ushort\",\"using\",\"virtual\",\"void\",\"volatile\",\"while\"],\"saveWords\":[\"add\",\"alias\",\"ascending\",\"async\",\"await\",\"by\",\"descending\",\"dynamic\",\"equals\",\"from\",\"get\",\"global\",\"group\",\"into\",\"join\",\"let\",\"nameof\",\"on\",\"orderby\",\"partial\",\"remove\",\"select\",\"set\",\"unmanaged\",\"value\",\"var\",\"when\",\"where\",\"yield\"]},{\"language\":\"javascript\",\"ref\":\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords\",\"keywords\":[\"break\",\"case\",\"catch\",\"class\",\"const\",\"continue\",\"debugger\",\"default\",\"delete\",\"do\",\"else\",\"export\",\"extends\",\"finally\",\"for\",\"function\",\"if\",\"import\",\"in\",\"instanceof\",\"new\",\"return\",\"super\",\"switch\",\"this\",\"throw\",\"try\",\"typeof\",\"var\",\"void\",\"while\",\"with\",\"yield\"],\"saveWords\":[\"enum\",\"implements\",\"interface\",\"let\",\"package\",\"private\",\"protected\",\"public\",\"static\",\"await\",\"abstract\",\"boolean\",\"byte\",\"char\",\"double\",\"final\",\"float\",\"goto\",\"int\",\"long\",\"native\",\"short\",\"synchronized\",\"throws\",\"transient\",\"volatile\"]}]";
+                var assembly = Assembly.GetExecutingAssembly();
+                var configStream = assembly.GetManifestResourceStream("Shared.keywords.json");
+                var streamReader = new StreamReader(configStream);
+                var str = streamReader.ReadToEnd();
+
                 return JsonConvert.DeserializeObject<List<KeyWords>>(str);
             }
             catch (Exception ex)

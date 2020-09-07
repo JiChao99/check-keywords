@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckKeywordsBlazor", "CheckKeywordsBlazor\CheckKeywordsBlazor.csproj", "{0B6BEA6B-F03E-44B4-84EC-F3D1F5A1E241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckKeywordsGateway", "CheckKeywordsGateway\CheckKeywordsGateway.csproj", "{BD59E111-6A77-42EB-8A45-6AA6C1177B87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckKeywordsGateway", "CheckKeywordsGateway\CheckKeywordsGateway.csproj", "{BD59E111-6A77-42EB-8A45-6AA6C1177B87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,12 +10,22 @@ namespace CheckKeywordsBlazor.Pages
     public partial class Index
     {
         private CheckResult Result;
-        private string param;
+        private string Param;
 
         private void Check()
         {
-                var x = CheckKeywords.Check(param);
-            Result = x;
+            try
+            {
+
+                Result = CheckKeywords.Check(Param);
+            }
+            catch
+            {
+                Result = new CheckResult
+                {
+                    Result = 0
+                };
+            }
         }
     }
 }

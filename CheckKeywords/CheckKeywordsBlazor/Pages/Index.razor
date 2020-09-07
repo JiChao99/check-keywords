@@ -3,8 +3,10 @@
 <h3>Check Keywords</h3>
 <p>
     <label>
-        need check json:
-        <textarea cols="60" rows="10" class="form-control" id="Param" @bind="@param"></textarea>
+        need check value:<br />
+        - can use ',',split need check value, like this: public,function<br />
+        - can use json,like this;{"public":{"function":""}}<br />
+        <textarea cols="60" rows="10" class="form-control" id="Param" @bind="@Param"></textarea>
     </label>
 </p>
 <p>
@@ -75,7 +77,7 @@ Result:
     }
     else
     {
-        <span style="color:red">must be a Json</span>
+        <span style="color:red">Some error, tell us <a href="mailto:jichao99@outlook.com">send email</a></span>
     }
 </p>
 }
