@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-using Shared.Model;
+﻿using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
-using System.Text;
+using System.Text.Json;
 
 namespace Shared.Handlers
 {
@@ -78,14 +76,13 @@ namespace Shared.Handlers
                 var streamReader = new StreamReader(configStream);
                 var str = streamReader.ReadToEnd();
 
-                return JsonConvert.DeserializeObject<List<KeyWords>>(str);
+                return JsonSerializer.Deserialize<List<KeyWords>>(str);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 return default;
             }
-
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace Shared.Handlers
 {
@@ -8,24 +8,27 @@ namespace Shared.Handlers
     {
         public override List<string> BuildNeedCheckWords(string str)
         {
+            var jsonDocument = JsonDocument.Parse(str, new JsonDocumentOptions
+            {
+                AllowTrailingCommas = true,
+                CommentHandling = JsonCommentHandling.Skip
+            });
+
             var words = new List<string>();
-            var jsonObject = JObject.Parse(str);
-            BuildJsonAllKey(jsonObject, words);
+            BuildJsonAllKey(jsonDocument.RootElement, words);
 
             return words.Distinct().ToList();
-
         }
 
-        private static void BuildJsonAllKey(JObject jObject, List<string> keys)
+        private static void BuildJsonAllKey(JsonElement jsonElement, List<string> keys)
         {
-            foreach (var item in jObject.Cast<KeyValuePair<string, JToken>>().ToList())
+            foreach (var jsonProperty in jsonElement.EnumerateObject())
             {
-                keys.Add(item.Key);
+                keys.Add(jsonProperty.Name);
 
-                if (item.Value is JObject itemValueJObject)
+                if (jsonProperty.Value.ValueKind == JsonValueKind.Object)
                 {
-                    BuildJsonAllKey(itemValueJObject, keys);
-                    continue;
+                    BuildJsonAllKey(jsonProperty.Value, keys);
                 }
             }
         }

@@ -32,15 +32,10 @@ namespace Shared
         {
             try
             {
-                JsonSerializer.Deserialize<object>(str, new JsonSerializerOptions
+                JsonDocument.Parse(str, new JsonDocumentOptions
                 {
-                    // 允许注释和尾随逗号
-                    // https://docs.microsoft.com/zh-cn/dotnet/standard/serialization/system-text-json-how-to#allow-comments-and-trailing-commas
-                    ReadCommentHandling = JsonCommentHandling.Skip,
-                    AllowTrailingCommas = true
-
-                    // 注：System.Text.Json 无法完全兼容 Newtonsoft.Json，例如不规范的写法会抛出异常，参见：
-                    // https://docs.microsoft.com/zh-cn/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to#json-strings-property-names-and-string-values
+                    AllowTrailingCommas = true,
+                    CommentHandling = JsonCommentHandling.Skip
                 });
 
                 return true;
