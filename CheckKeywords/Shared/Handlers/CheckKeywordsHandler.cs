@@ -76,7 +76,10 @@ namespace Shared.Handlers
                 var streamReader = new StreamReader(configStream);
                 var str = streamReader.ReadToEnd();
 
-                return JsonSerializer.Deserialize<List<KeyWords>>(str);
+                return JsonSerializer.Deserialize<List<KeyWords>>(str, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
             }
             catch (Exception ex)
             {

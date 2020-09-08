@@ -22,14 +22,15 @@ namespace Shared.Handlers
 
         private static void BuildJsonAllKey(JsonElement jsonElement, List<string> keys)
         {
+            if (jsonElement.ValueKind != JsonValueKind.Object)
+            {
+                return;
+            }
+
             foreach (var jsonProperty in jsonElement.EnumerateObject())
             {
                 keys.Add(jsonProperty.Name);
-
-                if (jsonProperty.Value.ValueKind == JsonValueKind.Object)
-                {
-                    BuildJsonAllKey(jsonProperty.Value, keys);
-                }
+                BuildJsonAllKey(jsonProperty.Value, keys);
             }
         }
     }
