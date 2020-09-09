@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Shared.Model;
+﻿using Shared.Model;
 using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Json;
-using System.Text;
+using System.Text.Json;
 
 namespace Shared
 {
@@ -36,8 +32,12 @@ namespace Shared
         {
             try
             {
+                JsonDocument.Parse(str, new JsonDocumentOptions
+                {
+                    AllowTrailingCommas = true,
+                    CommentHandling = JsonCommentHandling.Skip
+                });
 
-                JObject.Parse(str);
                 return true;
             }
             catch
