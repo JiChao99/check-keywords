@@ -25,8 +25,7 @@ curl api.jichao.top/check/{word}
 ## TODO
 
 - [ ] support swagger
-- [ ] use System.Text.Json not Newtonsoft.Json
-- ~~[ ] react~~
+- [x] use System.Text.Json not Newtonsoft.Json
 - [x] [gitee site](https://checkkeywords.gitee.io)
 - [x] **classlibray use json file**
 - [ ] add program language keywords/saveWords
