@@ -35,4 +35,4 @@ curl api.jichao.top/check/{word}
 - C#
 - javaScript
 
-![img](checkKeywords.png)
+![img](http://check.jichao.top/checkKeywords1x.png)
