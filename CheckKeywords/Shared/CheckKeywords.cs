@@ -1,5 +1,6 @@
 ﻿using Shared.Model;
 using System;
+using System.Linq;
 using System.Text.Json;
 
 namespace Shared
@@ -14,35 +15,34 @@ namespace Shared
         }
         public static CheckResult Check(string checkValue)
         {
-            if (IsJson(checkValue))
-            {
-                return Check(EnumCheckType.Json, checkValue);
-            }
-            else if (Uri.IsWellFormedUriString(checkValue, UriKind.Absolute))
-            {
-                return Check(EnumCheckType.SwaggerUrl, checkValue);
-            }
-            else
-            {
-                return Check(EnumCheckType.Word, checkValue);
-            }
+            return Check(GetCheckType(checkValue), checkValue);
         }
 
-        public static bool IsJson(string str)
+        public static EnumCheckType GetCheckType(string str)
         {
             try
             {
-                JsonDocument.Parse(str, new JsonDocumentOptions
+                var jsonDocument = JsonDocument.Parse(str, new JsonDocumentOptions
                 {
                     AllowTrailingCommas = true,
                     CommentHandling = JsonCommentHandling.Skip
                 });
-
-                return true;
+                if (jsonDocument.RootElement.ValueKind == JsonValueKind.Object)
+                {
+                    if (jsonDocument.RootElement.TryGetProperty("swagger", out _))
+                    {
+                        return EnumCheckType.Swagger;
+                    }
+                    else if (jsonDocument.RootElement.TryGetProperty("openapi", out _))
+                    {
+                        return EnumCheckType.OpenApi;
+                    }
+                }
+                return EnumCheckType.Json;
             }
             catch
             {
-                return false;
+                return EnumCheckType.Words;
             }
         }
     }

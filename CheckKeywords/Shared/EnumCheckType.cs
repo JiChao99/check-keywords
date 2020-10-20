@@ -6,8 +6,9 @@ namespace Shared
 {
     public enum EnumCheckType
     {
-        Word = 1,
+        Words = 1,
         Json = 2,
-        SwaggerUrl = 3
+        Swagger = 3,
+        OpenApi = 4
     }
 }

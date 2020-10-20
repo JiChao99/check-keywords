@@ -9,9 +9,9 @@ namespace Shared
     {
         public static CheckKeywordsHandler CreateHandler(EnumCheckType type) => type switch
         {
-            EnumCheckType.Word => new WordsHandler(),
+            EnumCheckType.Words => new WordsHandler(),
             EnumCheckType.Json => new JsonHandler(),
-            EnumCheckType.SwaggerUrl => new SwaggerHandler(),
+            EnumCheckType.Swagger => new SwaggerHandler(),
             _ => throw new NotImplementedException()
         };
     }
