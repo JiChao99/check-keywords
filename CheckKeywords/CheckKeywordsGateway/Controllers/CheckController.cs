@@ -2,7 +2,9 @@
 using Microsoft.Net.Http.Headers;
 using Shared;
 using Shared.Model;
+using System;
 using System.Linq;
+using System.Net.Http;
 
 namespace CheckKeywordsGateway.Controllers
 {
@@ -25,6 +27,13 @@ namespace CheckKeywordsGateway.Controllers
         [HttpGet("{str}")]
         public ActionResult Check(string str)
         {
+            var needCheckValue = Uri.UnescapeDataString(str);
+            if (Uri.IsWellFormedUriString(needCheckValue, UriKind.Absolute))
+            {
+                var httpClient = new HttpClient();
+                str = httpClient.GetStringAsync(needCheckValue).Result;
+            }
+
             var result = CheckKeywords.Check(str);
             var agent = HttpContext.Request.Headers[HeaderNames.UserAgent][0].ToLower();
 
@@ -66,7 +75,7 @@ REF:{t.Ref}
 ";
                 });
                 var saveWords = checkResult.Items.Where(t => t.Type == (int)EnumKeywordsType.SaveWords).ToList();
-                if(saveWords.Any())
+                if (saveWords.Any())
                 {
                     result += "\r\n[34mSavewords[0m\r\n";
                     saveWords.ForEach(t =>
@@ -77,7 +86,7 @@ REF:{t.Ref}
 ";
                      });
                 }
-                
+
             }
             else
             {

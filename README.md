@@ -22,9 +22,13 @@ OR
 curl api.jichao.top/check/{word}
 ```
 
+### WEB
+
+[checkkeywords.gitee.io](https://checkkeywords.gitee.io/)
+
 ## TODO
 
-- [ ] support swagger
+- [x] support swagger and openapi
 - [x] use System.Text.Json not Newtonsoft.Json
 - [x] [gitee site](https://checkkeywords.gitee.io)
 - [x] **classlibray use json file**
