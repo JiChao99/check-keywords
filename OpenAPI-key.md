@@ -1,0 +1,35 @@
+# OpenAPI
+
+- `openapi` OpenAPI版本
+- `info` API信息 
+    - `title` 
+    - `description` 
+    - `termsOfService` 
+    - `contact` [ContactObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#contactObject)
+    - `license` [LicenseObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#licenseObject)
+    - `version` 
+- `servers` 服务器对象
+    - `url` 
+    - `description` 
+    - `variables` [ServerVariableObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#serverVariableObject)
+- `paths` API可用路径和操作
+    - `{path}` [PathItemObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#pathItemObject)
+- `components` 各种架构元素
+    - `schemas` [SchemaObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#schemaObject)
+    - `responses` [ResponseObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#responseObject)
+    - `parameters` [ParameterObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#parameterObject)
+    - `examples` [ExampleObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#exampleObject)
+    - `requestBodies` [RequestBodyObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#requestBodyObject)
+    - `headers` [HeaderObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#headerObject)
+    - `securitySchemes` [SecuritySchemeObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#securitySchemeObject)
+    - `links` [LinkObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#linkObject)
+    - `callbacks` [CallbackObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#callbackObject)
+- `security` API安全机制声明
+    - `{name}`
+- `tags` 标签列表
+    - `name`
+    - `description`
+    - `externalDocs` [ExternalDocumentationObject](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#externalDocumentationObject)
+- `externalDocs` 外部文档
+    - `description`
+    - `url`

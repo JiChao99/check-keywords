@@ -12,6 +12,7 @@ namespace Shared
             EnumCheckType.Words => new WordsHandler(),
             EnumCheckType.Json => new JsonHandler(),
             EnumCheckType.Swagger => new SwaggerHandler(),
+            EnumCheckType.OpenApi => new OpenAPIHandler(),
             _ => throw new NotImplementedException()
         };
     }
