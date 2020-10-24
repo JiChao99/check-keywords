@@ -30,9 +30,10 @@ curl api.jichao.top/check/{word}
 
 - [x] support swagger and openapi
 - [x] use System.Text.Json not Newtonsoft.Json
-- [x] [gitee site](https://checkkeywords.gitee.io)
+- [x] [blazor web site](https://checkkeywords.gitee.io)
 - [x] **classlibray use json file**
-- [ ] add program language keywords/saveWords
+- [x] program language keywords/saveWords
+    - `C#, JavaScript, C, Java, Python, C++, PHP, VB, R, Ruby, Go, Swift, Objective-C, Rust, Kotlin, Dart, TypeScript`
 
 ## Program Language
 

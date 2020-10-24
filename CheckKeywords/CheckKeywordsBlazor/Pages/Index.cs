@@ -15,7 +15,7 @@ namespace CheckKeywordsBlazor.Pages
         [Inject]
         protected HttpClient Client { get; set; }
         private CheckResult Result;
-        private string Param;
+        private string Param = string.Empty;
 
         private async Task Check()
         {
