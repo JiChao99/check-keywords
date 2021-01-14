@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -8,6 +8,7 @@
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
+    <link href="_content/AntDesign/css/ant-design-blazor.css" rel="stylesheet">
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <style>
@@ -135,7 +136,9 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="decode.min.js"></script>
+    <script src="_content/AntDesign/js/ant-design-blazor.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script src="csfunc.js"></script>
     <script>
         Blazor.start({
             loadBootResource: function (type, name, defaultUri, integrity) {

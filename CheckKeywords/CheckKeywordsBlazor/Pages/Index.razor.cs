@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Shared;
 using Shared.Model;
 using System;
@@ -16,9 +17,11 @@ namespace CheckKeywordsBlazor.Pages
         protected HttpClient Client { get; set; }
         private CheckResult Result;
         private string Param = string.Empty;
+        string ShowDiv = "none";
 
         private async Task Check()
         {
+
             try
             {
                 if (Uri.IsWellFormedUriString(Param, UriKind.Absolute))
@@ -29,6 +32,22 @@ namespace CheckKeywordsBlazor.Pages
                 }
 
                 Result = CheckKeywords.Check(Param);
+                var z = Param;
+                if (Result.Result != 1)
+                {
+                    foreach (var item in Result.Items)
+                    {
+                        item.Words.ForEach(t =>
+                        {
+                            z = z.Replace(t, "<code>" + t + "</code>");
+                        });
+                    }
+                }
+                if (!string.IsNullOrEmpty(z))
+                {
+                    await JS.InvokeVoidAsync("csfunc.appendHtml", @"AAA", z);
+                    ShowDiv = "block";
+                }
             }
             catch
             {

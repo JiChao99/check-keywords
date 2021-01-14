@@ -1,22 +1,8 @@
-﻿@page "/"
-<h3>Check Keywords</h3>
-<body>
-    <div>
-        <p>need check value:</p>
-        <ul>
-            <li>check words, use <code>,</code> split need check value, like this: <code>public,function</code></li>
-            <li>check json, like this <code>{"public":{"function":""}}</code></li>
-            <li>
-                check swagger/openapi<ul>
-                    <li>swagger/openapi json url, like this <code>https://petstore.swagger.io/v2/swagger.json</code></li>
-                    <li>json content</li>
-                </ul>
-            </li>
-        </ul>
-        <p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" class="navbar-nav-svg" viewBox="0 0 512 499.36" role="img"><title>GitHub</title><path fill="currentColor" fill-rule="evenodd" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path></svg><a href="https://github.com/JiChao99/check-keywords"> Source Code </a>
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 228 228" enable-background="new 0 0 228 228" xml:space="preserve">  <image id="image0" width="228" height="228" x="0" y="0"
-                                                                                                                                                                                                                                                             href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAYAAACIV4iNAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+@page "/"
+@inject IJSRuntime JS
+
+@{
+    RenderFragment CodelfSvg = @<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 228 228" enable-background="new 0 0 228 228" xml:space="preserve"><image id="image0" x="0" y="0" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAYAAACIV4iNAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
 AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAA
 B3RJTUUH5AoZFR4mOgEoOQAADOpJREFUeNrt3WuMXOddx/Hvc86Z2dmZvdpZ23Xs2E1DEidNWkJc
 mkAjgtIKtRJIaQuCgJBA0HJRBaIIIaEICYnLuyBR1FKBBBWXpgjalCZFxC5RRFAwVpMAISmXxHHW
@@ -84,15 +70,36 @@ SGVpZ2h0ADIyOEE6/9kAAAAXdEVYdFRodW1iOjpJbWFnZTo6V2lkdGgAMjI40suvhAAAABl0RVh0
 VGh1bWI6Ok1pbWV0eXBlAGltYWdlL3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNjAzNjAz
 ODM43O6jRAAAABJ0RVh0VGh1bWI6OlNpemUAMzk2N0JCsdZDbgAAAEZ0RVh0VGh1bWI6OlVSSQBm
 aWxlOi8vL2FwcC90bXAvaW1hZ2VsYy9pbWd2aWV3Ml85XzE2MDI1Nzg0NDk1NjYzMDIzXzcyX1sw
-XfmtYl0AAAAASUVORK5CYII="></image>
-</svg><a href="https://unbug.github.io/codelf/"> CODELF</a>
+XfmtYl0AAAAASUVORK5CYII = "></image></svg>;
+}
+
+<h3>Check Keywords</h3>
+<body>
+    <div>
+        <p>need check value:</p>
+        <ul>
+            <li>check words, use <code>,</code> split need check value, like this: <code>public,function</code></li>
+            <li>check json, like this <code>{"public":{"function":""}}</code></li>
+            <li>
+                check swagger/openapi<ul>
+                    <li>swagger/openapi json url, like this <code>https://petstore.swagger.io/v2/swagger.json</code></li>
+                    <li>json content</li>
+                </ul>
+            </li>
+        </ul>
+        <p>
+            <Icon Type="github" Theme="fill" Style="font-size:16px" /><a href="https://github.com/JiChao99/check-keywords"> Sousrce Code </a>
+            <Icon Component="CodelfSvg" Style="font-size:16px"></Icon> <a href="https://unbug.github.io/codelf/"> CODELF</a>
+            <Icon Type="read" Theme="outline" Style="font-size:16px" /><a href="//blog.jichao.top/2020/10/25/CheckKeywords?sourceType=CheckKeywordsBlazorAPP"> Blog</a>
         </p>
     </div>
-    <label>
-        <textarea cols="60" rows="10" class="form-control" id="Param" @bind="@Param"></textarea>
-    </label>
+    <textarea placeholder="need check words,json,swagger url" style="width:60%" rows="12" class="form-control" id="Param" @bind="@Param"></textarea>
+    <br />
+    <div Style="width: 60%;max-width: 60%;display: @ShowDiv;border: solid 1px;border-radius: 2%;white-space: normal;word-break: break-all;overflow: hidden;" Id="AAA">
+    </div>
+    <br />
     <p>
-        <button class="btn-success" @onclick="Check">Check</button>
+        <Button Type="primary" OnClick="Check">Check</Button>
     </p>
 
     @if (Result != null)
@@ -164,3 +171,4 @@ XfmtYl0AAAAASUVORK5CYII="></image>
             </p>
         }
 </body>
+
