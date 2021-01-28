@@ -10,11 +10,11 @@ namespace Shared.Handlers
 {
     public abstract class CheckKeywordsHandler
     {
-        public CheckResult Check(string str)
+        public CheckResult Check(string str, List<string> LanguageNames = null)
         {
             var result = new CheckResult();
             result.Items = new List<LanguageWordsItem>();
-            var allKeywords = GetAllKeyWords();
+            var allKeywords = GetAllKeyWords(LanguageNames);
             var words = BuildNeedCheckWords(str);
 
             var existsKeywords = allKeywords.Select(t => new
@@ -67,7 +67,7 @@ namespace Shared.Handlers
 
         public abstract List<string> BuildNeedCheckWords(string str);
 
-        public static List<KeyWords> GetAllKeyWords()
+        public static List<KeyWords> GetAllKeyWords(List<string> LanguageNames = null)
         {
             try
             {
@@ -76,10 +76,17 @@ namespace Shared.Handlers
                 var streamReader = new StreamReader(configStream);
                 var str = streamReader.ReadToEnd();
 
-                return JsonSerializer.Deserialize<List<KeyWords>>(str, new JsonSerializerOptions
+                var result = JsonSerializer.Deserialize<List<KeyWords>>(str, new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
+
+                if (LanguageNames == null || !LanguageNames.Any(t => !string.IsNullOrEmpty(t)))
+                {
+                    return result;
+                }
+
+                return result.Where(t => LanguageNames.Contains(t.Language)).ToList();
             }
             catch (Exception ex)
             {

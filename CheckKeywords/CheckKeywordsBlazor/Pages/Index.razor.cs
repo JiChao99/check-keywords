@@ -93,6 +93,8 @@ ODM43O6jRAAAABJ0RVh0VGh1bWI6OlNpemUAMzk2N0JCsdZDbgAAAEZ0RVh0VGh1bWI6OlVSSQBm
 aWxlOi8vL2FwcC90bXAvaW1hZ2VsYy9pbWd2aWV3Ml85XzE2MDI1Nzg0NDk1NjYzMDIzXzcyX1sw
 XfmtYl0AAAAASUVORK5CYII = '></image></svg>");
 
+        private readonly List<string> LanguageNames = CheckKeywords.GetAllProgramNames();
+        IEnumerable<string> SelectedLanguageNames { get; set; }
         public Index()
         {
             ShowResultFragment = false;
@@ -118,7 +120,7 @@ XfmtYl0AAAAASUVORK5CYII = '></image></svg>");
                     Param = await Client.GetStringAsync(url);
                 }
 
-                Result = CheckKeywords.Check(Param);
+                Result = CheckKeywords.Check(Param, SelectedLanguageNames.ToList());
                 var z = Param;
                 if (Result.Result != 1)
                 {

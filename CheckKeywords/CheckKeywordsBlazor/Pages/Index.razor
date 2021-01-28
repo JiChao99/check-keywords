@@ -18,10 +18,27 @@
         <p>
             <Icon Type="github" Theme="fill" Style="font-size:16px" /><a href="https://github.com/JiChao99/check-keywords" target="_blank"> Sousrce Code </a>
             <Icon Component="CodelfSvg" Style="font-size:16px"></Icon> <a href="https://unbug.github.io/codelf/" target="_blank"> CODELF</a>
-            <Icon Type="read" Theme="outline" Style="font-size:16px" /><a href="//blog.jichao.top/2020/10/25/CheckKeywords?source=CheckKeywordsBlazorAPP" target="_blank"> Blog</a>
+            <Icon Type="read" Theme="outline" Style="font-size:16px" /><a href="https://blog.jichao.top/2020/10/25/CheckKeywords?source=CheckKeywordsBlazorAPP" target="_blank"> Blog</a>
         </p>
     </div>
-    <textarea placeholder="need check words,json,swagger url" style="display:@(ShowResultFragment?"none":"block")" rows="12" class="form-control" id="Param" @bind="@Param"></textarea>
+    <Select Mode="multiple"
+            Placeholder="Please select need support program language"
+            @bind-Values="@SelectedLanguageNames"
+            TItemValue="string"
+            TItem="string"
+            Style="width: 100%; margin-bottom: 8px;"
+            EnableSearch ="true"
+            Size = "large"
+            AllowClear>
+        <SelectOptions>
+            @foreach (var item in LanguageNames)
+            {
+                <SelectOption TItemValue="string" TItem="string" Value=@item Label=@item />
+            }
+        </SelectOptions>
+    </Select>
+    <textarea spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"
+              placeholder="need check words,json,swagger url" style="display:@(ShowResultFragment?"none":"block")" rows="12" class="form-control" id="Param" @bind="@Param"></textarea>
     @*<div Style="width: 60%;max-width: 60%;display: @ShowDiv;border: solid 1px;border-radius: 2%;white-space: normal;word-break: break-all;overflow: hidden;" Id="AAA">
         </div>*@
 
@@ -44,31 +61,31 @@
     @if (Result != null)
     {
         <p>
-        Result:
-        @if (Result.Result == 1)
-        {
-            <span style="color:green">Perfect √</span>
-        }
-        else if (Result.Result == 2)
-        {
-            <span style="color:blue">Usable </span>
-            <br />
-            <b>Savewords</b>
-
-            foreach (var item in Result.Items)
+            Result:
+            @if (Result.Result == 1)
             {
-            <p>
-                <span>Language: @item.Language</span>
+                <span style="color:green">Perfect</span>
+            }
+            else if (Result.Result == 2)
+            {
+                <span style="color:blue">Usable</span>
                 <br />
-                <span>Save words : @string.Join(',', item.Words)</span>
-                <br />
-                <a href="@item.Ref">REF: @item.Ref</a>
-            </p>
+                <b>Savewords</b>
+
+                foreach (var item in Result.Items)
+                {
+                <p>
+                    <span>Language: @item.Language</span>
+                    <br />
+                    <span>Save words : @string.Join(',', item.Words)</span>
+                    <br />
+                    <a href="@item.Ref">REF: @item.Ref</a>
+                </p>
             }
         }
         else if (Result.Result == 3)
         {
-            <span style="color:red">Disable × </span>
+            <span style="color:red">Disable</span>
 
             var keywrods = Result.Items.Where(t => t.Type == 1).ToList();
             var savewords = Result.Items.Where(t => t.Type == 2).ToList();

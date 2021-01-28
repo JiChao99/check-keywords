@@ -1,5 +1,7 @@
-﻿using Shared.Model;
+﻿using Shared.Handlers;
+using Shared.Model;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
@@ -7,15 +9,19 @@ namespace Shared
 {
     public class CheckKeywords
     {
-        public static CheckResult Check(EnumCheckType checkType, string checkValue)
+        public static CheckResult Check(EnumCheckType checkType, string checkValue, List<string> LanguageNames)
         {
             var hander = CheckKeywordsFactory.CreateHandler(checkType);
 
-            return hander.Check(checkValue);
+            return hander.Check(checkValue, LanguageNames);
         }
-        public static CheckResult Check(string checkValue)
+        public static CheckResult Check(string checkValue, List<string> LanguageNames = null)
         {
-            return Check(GetCheckType(checkValue), checkValue);
+            return Check(GetCheckType(checkValue), checkValue, LanguageNames);
+        }
+        public static List<string> GetAllProgramNames()
+        {
+            return CheckKeywordsHandler.GetAllKeyWords().Select(t => t.Language).ToList();
         }
 
         public static EnumCheckType GetCheckType(string str)
