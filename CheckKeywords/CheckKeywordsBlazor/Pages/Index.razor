@@ -1,4 +1,6 @@
-﻿@page "/"
+@page "/"
+@inject IJSRuntime JS
+
 <h3>Check Keywords</h3>
 <body>
     <div>
@@ -14,85 +16,46 @@
             </li>
         </ul>
         <p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" class="navbar-nav-svg" viewBox="0 0 512 499.36" role="img"><title>GitHub</title><path fill="currentColor" fill-rule="evenodd" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path></svg><a href="https://github.com/JiChao99/check-keywords"> Source Code </a>
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 228 228" enable-background="new 0 0 228 228" xml:space="preserve">  <image id="image0" width="228" height="228" x="0" y="0"
-                                                                                                                                                                                                                                                             href="data:image/png;base64,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
-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
-FKSY5j08s3odz23dEHqUWihIsc1BBfzr6rfTLzqhp9lxClJMc0BVwbEz389Lg/2hx9lxClLM8x7y
-MmW2nYYeZccpSDHPOdjotxj4XaFH2XHRBBnXCViTxzvPufxQ6DF2XBRBOudV5ATI3DD0CDsuiiAT
-50kU5FhLkoql5vOhx9j5+xl6gDo0koLEbR8ckPGUkNLtj0KPUcP9jEAjGdFMBqHHkDfIe7jmirM0
-3eQvFhZJkAOmki5Ou61jxwOD3PPxo59m//R/hx5nx0UR5N7WMu87+EXSZPsXLOPDAUudPqOt5dCj
-1CKKILMk57Y9x5lOeypyDN269wTXzvxD6DFqEUWQADfMn+Ddb3lcu61jxHtY6mzwvv33k7ki9Di1
-iCZIgHuuvo+Z5lAbyTHhHNy4+BRHdx8PPUptogrywPTX+MChv8KhPddxsNTe5IcO/27oMWoVVZAA
-P3L4Pt5z5WPbUapKk7yHzlTB+w/+Gfunnw89Tq2iC7KdbfCLR36Jo3tP6P2kUY3UcevuR/jQoU/R
-zrZCj1Or6IIEmG2s8evv/GnuOvDQN6LU1jIs719dzTxzHF36Cr/89o/TSvuhx6qdW3lgMdqn4qBs
-c+zMD/CFF+7hxe415KXHo/PQQ3DOccvSSd575ed51+6/ZbaxEXqkMI9DzEG+5uXBPtbzK3jo9N08
-sXoH3bzN1mgap/Nfd4xzkLqKVtpnULb4iWvv4459D7HQfCX0aGEfFwUpYkeU7yFFrFKQIoYoSBFD
-FKSIIQpSxBAFKWKIghQxREGKGKIgRQxRkCKGKEgRQxSkiCEKUsQQBSliiIIUMURBihiiIEUMUZAi
-hihIEUMUpIghClLEEAUpYoiCFDFEQYoYoiBFDFGQIoYoSBFDFKSIIQpSxBAFKWKIghQxREGKGKIg
-RQxRkCKGKEgRQxSkiCEKUsSQ/wFge37h7X0EMQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0xMC0y
-NVQxMzozMDozOCswODowMAZtmrcAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMTAtMjVUMTM6MzA6
-MzgrMDg6MDB3MCILAAAAIHRFWHRzb2Z0d2FyZQBodHRwczovL2ltYWdlbWFnaWNrLm9yZ7zPHZ0A
-AAAYdEVYdFRodW1iOjpEb2N1bWVudDo6UGFnZXMAMaf/uy8AAAAYdEVYdFRodW1iOjpJbWFnZTo6
-SGVpZ2h0ADIyOEE6/9kAAAAXdEVYdFRodW1iOjpJbWFnZTo6V2lkdGgAMjI40suvhAAAABl0RVh0
-VGh1bWI6Ok1pbWV0eXBlAGltYWdlL3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNjAzNjAz
-ODM43O6jRAAAABJ0RVh0VGh1bWI6OlNpemUAMzk2N0JCsdZDbgAAAEZ0RVh0VGh1bWI6OlVSSQBm
-aWxlOi8vL2FwcC90bXAvaW1hZ2VsYy9pbWd2aWV3Ml85XzE2MDI1Nzg0NDk1NjYzMDIzXzcyX1sw
-XfmtYl0AAAAASUVORK5CYII="></image>
-</svg><a href="https://unbug.github.io/codelf/"> CODELF</a>
+            <Icon Type="github" Theme="fill" Style="font-size:16px" /><a href="https://github.com/JiChao99/check-keywords" target="_blank"> Sousrce Code </a>
+            <Icon Component="CodelfSvg" Style="font-size:16px"></Icon> <a href="https://unbug.github.io/codelf/" target="_blank"> CODELF</a>
+            <Icon Type="read" Theme="outline" Style="font-size:16px" /><a href="https://blog.jichao.top/2020/10/25/CheckKeywords?source=CheckKeywordsBlazorAPP" target="_blank"> Blog</a>
         </p>
     </div>
-    <label>
-        <textarea cols="60" rows="10" class="form-control" id="Param" @bind="@Param"></textarea>
-    </label>
+    <Select Mode="multiple"
+            Placeholder="Please select need support program language"
+            @bind-Values="@SelectedLanguageNames"
+            TItemValue="string"
+            TItem="string"
+            Style="width: 100%; margin-bottom: 8px;"
+            EnableSearch ="true"
+            Size = "large"
+            AllowClear>
+        <SelectOptions>
+            @foreach (var item in LanguageNames)
+            {
+                <SelectOption TItemValue="string" TItem="string" Value=@item Label=@item />
+            }
+        </SelectOptions>
+    </Select>
+    <textarea spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"
+              placeholder="need check words,json,swagger url" style="display:@(ShowResultFragment?"none":"block")" rows="12" class="form-control" id="Param" @bind="@Param"></textarea>
+    @*<div Style="width: 60%;max-width: 60%;display: @ShowDiv;border: solid 1px;border-radius: 2%;white-space: normal;word-break: break-all;overflow: hidden;" Id="AAA">
+        </div>*@
+
+    <div Style="
+        display: @(ShowResultFragment?"block":"none");
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        white-space: normal;
+        word-break: break-all;
+        overflow: hidden;
+        padding: .375rem .75rem;"
+         @onclick="ChangShowResultFragment">
+        @ResultFragment
+    </div>
+    <br />
     <p>
-        <button class="btn-success" @onclick="Check">Check</button>
+        <Button Type="primary" OnClick="Check">Check</Button>
     </p>
 
     @if (Result != null)
@@ -101,11 +64,11 @@ XfmtYl0AAAAASUVORK5CYII="></image>
             Result:
             @if (Result.Result == 1)
             {
-                <span style="color:green">Perfect √</span>
+                <span style="color:green">Perfect</span>
             }
             else if (Result.Result == 2)
             {
-                <span style="color:blue">Usable </span>
+                <span style="color:blue">Usable</span>
                 <br />
                 <b>Savewords</b>
 
@@ -122,7 +85,7 @@ XfmtYl0AAAAASUVORK5CYII="></image>
         }
         else if (Result.Result == 3)
         {
-            <span style="color:red">Disable × </span>
+            <span style="color:red">Disable</span>
 
             var keywrods = Result.Items.Where(t => t.Type == 1).ToList();
             var savewords = Result.Items.Where(t => t.Type == 2).ToList();
@@ -159,8 +122,9 @@ XfmtYl0AAAAASUVORK5CYII="></image>
         }
         else
         {
-            <span style="color:red">Some error, tell us <a href="mailto:jichao99@outlook.com">send email</a></span>
+            <span style="color:red">Some error, tell us <a href="mailto:jichao99@outlook.com">send email</a> (with your checkValue, thx)</span>
         }
             </p>
         }
 </body>
+
