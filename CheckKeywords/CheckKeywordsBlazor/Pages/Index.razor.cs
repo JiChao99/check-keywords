@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CheckKeywordsBlazor.Pages
@@ -101,6 +102,7 @@ XfmtYl0AAAAASUVORK5CYII = '></image></svg>");
         public Index()
         {
             ShowResultFragment = false;
+            SelectedLanguageNames = new List<string>();
         }
 
         private void ChangShowResultFragment()
@@ -123,20 +125,19 @@ XfmtYl0AAAAASUVORK5CYII = '></image></svg>");
                 }
 
                 Result = CheckKeywords.Check(Param, SelectedLanguageNames.ToList());
-                var z = Param;
                 if (Result.Result != 1)
                 {
-                    foreach (var item in Result.Items)
-                    {
-                        item.Words.ForEach(t =>
-                        {
-                            z = z.Replace(t, "<code>" + t + "</code>");
-                        });
-                    }
+                    var ParamWithTag = Param;
+                    var keywords = Result.Items.SelectMany(t => t.Words).Distinct().ToList();
+                    var regTag = Param.Contains("\"") ? "\"" : ",| ";
+                    var keywordsStr = string.Join("|", keywords);
+                    var regex = $"(?<=({regTag}|^))({keywordsStr})(?=({regTag}|$))";
+
+                    ParamWithTag = Regex.Replace(ParamWithTag, regex, "<code>$2</code>");
 
                     //await JS.InvokeVoidAsync("csfunc.appendHtml", @"AAA", z);
                     ShowResultFragment = true;
-                    ResultFragment = (builder) => builder.AddMarkupContent(0, z);
+                    ResultFragment = (builder) => builder.AddMarkupContent(0, ParamWithTag);
                 }
                 else
                 {

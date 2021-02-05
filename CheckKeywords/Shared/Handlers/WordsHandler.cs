@@ -10,7 +10,7 @@ namespace Shared.Handlers
     {
         public override List<string> BuildNeedCheckWords(string str)
         {
-            return str.Split(',').ToList();
+            return str.Split(',').Select(t=>t.Trim()).ToList();
         }
     }
 }
