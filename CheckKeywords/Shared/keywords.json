@@ -332,7 +332,7 @@
   },
   {
     "language": "C++",
-    "ref": "keyword.kwlist",
+    "ref": "https://docs.microsoft.com/en-us/cpp/cpp/keywords-cpp",
     "keywords": [
       "alignas",
       "alignof",
