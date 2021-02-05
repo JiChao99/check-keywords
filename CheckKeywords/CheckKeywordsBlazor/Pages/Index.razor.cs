@@ -21,6 +21,9 @@ namespace CheckKeywordsBlazor.Pages
 
         private bool ShowResultFragment { get; set; }
 
+        private string ErrorInfo { get; set; }
+        private string SwaggerUrl { get; set; }
+
         private RenderFragment ResultFragment { get; set; }
 
         private readonly RenderFragment CodelfSvg = (builder) => builder.AddMarkupContent(0, @"<svg version = '1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='1rem' height='1rem' viewBox='0 0 228 228' enable-background='new 0 0 228 228' xml:space='preserve'><image id = 'image0' x='0' y='0' href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAYAAACIV4iNAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
@@ -104,7 +107,6 @@ XfmtYl0AAAAASUVORK5CYII = '></image></svg>");
         {
             ShowResultFragment = !ShowResultFragment;
         }
-
         private async Task Check()
         {
 
@@ -115,9 +117,9 @@ XfmtYl0AAAAASUVORK5CYII = '></image></svg>");
 
                 if (Uri.IsWellFormedUriString(Param, UriKind.Absolute))
                 {
-                    var url = Param;
+                    SwaggerUrl = Param;
                     Param = "loading..";
-                    Param = await Client.GetStringAsync(url);
+                    Param = await Client.GetStringAsync(SwaggerUrl);
                 }
 
                 Result = CheckKeywords.Check(Param, SelectedLanguageNames.ToList());
@@ -141,7 +143,17 @@ XfmtYl0AAAAASUVORK5CYII = '></image></svg>");
                     ShowResultFragment = false;
                 }
             }
-            catch
+            catch(HttpRequestException)
+            {
+                ErrorInfo = "error, please check your swagger url";
+                Param = SwaggerUrl;
+                SwaggerUrl = string.Empty;
+                Result = new CheckResult
+                {
+                    Result = 0
+                };
+            }
+            catch(Exception)
             {
                 Result = new CheckResult
                 {
