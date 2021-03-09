@@ -1,0 +1,134 @@
+@page "/"
+@inject IJSRuntime JS
+
+<h3>Check Keywords</h3>
+<body>
+    <div>
+        <p>need check value:</p>
+        <ul>
+            <li>check words, use <code>,</code> split need check value, like this: <code>public,function</code></li>
+            <li>check json, like this <code>{"public":{"function":""}}</code></li>
+            <li>
+                check swagger/openapi<ul>
+                    <li>swagger/openapi json url, like this <code>https://petstore.swagger.io/v2/swagger.json</code></li>
+                    <li>json content</li>
+                </ul>
+            </li>
+        </ul>
+        <p>
+            <Icon Type="github" Theme="fill" Style="font-size:16px" /><a href="#" @onclick='() => Launcher.OpenAsync("https://github.com/JiChao99/check-keywords")'> Source Code </a>
+            <Icon Component="CodelfSvg" Style="font-size:16px"></Icon> <a href="#" @onclick='() => Launcher.OpenAsync("https://unbug.github.io/codelf/")'> CODELF</a>
+            <Icon Type="read" Theme="outline" Style="font-size:16px" /><a href="#" @onclick='() => Launcher.OpenAsync("https://blog.jichao.top/2020/10/25/CheckKeywords?source=CheckKeywordsBlazorAPP")'> Blog</a>
+        </p>
+    </div>
+    <Select Mode="multiple"
+            Placeholder="Please select need support program language"
+            @bind-Values="@SelectedLanguageNames"
+            TItemValue="string"
+            TItem="string"
+            Style="width: 100%; margin-bottom: 8px;"
+            Size="large"
+            AllowClear>
+        <SelectOptions>
+            @foreach (var item in LanguageNames)
+            {
+                <SelectOption TItemValue="string" TItem="string" Value=@item Label=@item />
+            }
+        </SelectOptions>
+    </Select>
+    <textarea spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"
+              placeholder="need check words,json,swagger url" style="display:@(ShowResultFragment?"none":"block")" rows="12" class="form-control" id="Param" @bind="@Param"></textarea>
+
+    <div Style="
+        display: @(ShowResultFragment?"block":"none");
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        white-space: normal;
+        word-break: break-all;
+        overflow: hidden;
+        padding: .375rem .75rem;"
+         @onclick="ChangShowResultFragment">
+        @ResultFragment
+    </div>
+    <br />
+    <p>
+        <AntDesign.Button Type="primary" OnClick="Check">Check</AntDesign.Button>
+    </p>
+
+    @if (Result != null)
+    {
+        <p>
+            Result:
+            @if (Result.Result == 1)
+            {
+                <span style="color:green">Perfect</span>
+            }
+            else if (Result.Result == 2)
+            {
+                <span style="color:blue">Usable</span>
+                <br />
+                <b>Savewords</b>
+
+                foreach (var item in Result.Items)
+                {
+                <p>
+                    <span>Language: @item.Language</span>
+                    <br />
+                    <span>Save words : @string.Join(',', item.Words)</span>
+                    <br />
+                    <a href="@item.Ref">REF: @item.Ref</a>
+                </p>
+                }
+            }
+            else if (Result.Result == 3)
+            {
+            <span style="color:red">Disable</span>
+
+                var keywrods = Result.Items.Where(t => t.Type == 1).ToList();
+                var savewords = Result.Items.Where(t => t.Type == 2).ToList();
+            <br />
+            <b>Keywords</b>
+            <br />
+                foreach (var item in keywrods)
+                {
+                <p>
+                    <span>Language: @item.Language</span>
+                    <br />
+                    <span>Keywords : @string.Join(',', item.Words)</span>
+                    <br />
+                    <a href="#" @onclick="() => Launcher.OpenAsync(item.Ref)">REF: @item.Ref</a>
+                </p>
+                }
+
+                if (savewords.Any())
+                {
+                <b>Savewords</b>
+                <br />
+
+                    foreach (var item in savewords)
+                    {
+                    <p>
+                        <span>Language: @item.Language</span>
+                        <br />
+                        <span>Save words : @string.Join(',', item.Words)</span>
+                        <br />
+                        <a href="#" @onclick="() => Launcher.OpenAsync(item.Ref)">REF: @item.Ref</a>
+                    </p>
+                    }
+                }
+            }
+            else
+            {
+                @if (!string.IsNullOrEmpty(ErrorInfo))
+                {
+                    <span style="color:red">@ErrorInfo</span>
+                }
+                else
+                {
+                    <span style="color:red">Some error, tell us <a href="#" @onclick='() => Launcher.OpenAsync("mailto:jichao99@outlook.com?subject=CheckKeywords Mobile Error&body=checkValue:" + Param)'>send email</a></span>
+                }
+            }
+        </p>
+    }
+</body>
+
