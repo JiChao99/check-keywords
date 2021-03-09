@@ -36,7 +36,6 @@ namespace CheckKeywordsMobile
             var host = hostBuilder.Build();
 
             MainPage = new ContentPage { Title = "CheckKeywords" };
-            MainPage.BackgroundColor = Color.Orange;
             
             host.AddComponent<Main>(parent: MainPage);
         }
